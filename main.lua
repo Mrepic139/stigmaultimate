@@ -1,416 +1,233 @@
--- FRVGMXNT GUI2LUA CONVERTER 1.2. Like pls!
-local PROHAXScreenGui = {
-	PROHAXScreenGui = Instance.new("ScreenGui"),
-	MAIN = Instance.new("Frame"),
-	topbar = Instance.new("Frame"),
-	title = Instance.new("TextLabel"),
-	logo = Instance.new("ImageLabel"),
-	TextBox = Instance.new("TextBox"),
-	Execute = Instance.new("TextButton"),
-	ClearTextboxt = Instance.new("TextButton"),
-	injectaka_scan_all_the_game = Instance.new("ImageButton"),
-	Close = Instance.new("TextButton"),
-}
+--[[
+    Stigma Ultimate - Main Panel
+    Same UI + full system wired
+]]
 
-PROHAXScreenGui.PROHAXScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-PROHAXScreenGui.MAIN.Parent = PROHAXScreenGui.PROHAXScreenGui
-PROHAXScreenGui.topbar.Parent = PROHAXScreenGui.MAIN
-PROHAXScreenGui.title.Parent = PROHAXScreenGui.topbar
-PROHAXScreenGui.logo.Parent = PROHAXScreenGui.topbar
-PROHAXScreenGui.TextBox.Parent = PROHAXScreenGui.MAIN
-PROHAXScreenGui.Execute.Parent = PROHAXScreenGui.MAIN
-PROHAXScreenGui.ClearTextboxt.Parent = PROHAXScreenGui.MAIN
-PROHAXScreenGui.injectaka_scan_all_the_game.Parent = PROHAXScreenGui.MAIN
-PROHAXScreenGui.Close.Parent = PROHAXScreenGui.topbar
+local Players           = game:GetService("Players")
+local StarterGui        = game:GetService("StarterGui")
+local UserInputService  = game:GetService("UserInputService")
+local LP                = Players.LocalPlayer
 
-PROHAXScreenGui.PROHAXScreenGui.Name = "PROHAXScreenGui"
-PROHAXScreenGui.PROHAXScreenGui.ResetOnSpawn = true
-PROHAXScreenGui.PROHAXScreenGui.IgnoreGuiInset = false
-PROHAXScreenGui.PROHAXScreenGui.DisplayOrder = 0
+-- modules
+local Scanner     = require(script.Parent.scanner)
+local API         = require(script.Parent.api)
+local Functions   = require(script.Parent.functions)
+local Menu        = require(script.Parent.menu)
+local Dex         = require(script.Parent.dex)
+local Decompiler  = require(script.Parent.decompiler)
 
-PROHAXScreenGui.MAIN.Name = "MAIN"
-PROHAXScreenGui.MAIN.ZIndex = 1
-PROHAXScreenGui.MAIN.Position = UDim2.new(0.370499432, 0, 0.377276659, 0)
-PROHAXScreenGui.MAIN.Size = UDim2.new(0, 573, 0, 407)
-PROHAXScreenGui.MAIN.BackgroundColor3 = Color3.fromRGB(48,48,48)
-PROHAXScreenGui.MAIN.BackgroundTransparency = 0
-PROHAXScreenGui.MAIN.Visible = true
-PROHAXScreenGui.MAIN.AnchorPoint = Vector2.new(0, 0)
-PROHAXScreenGui.MAIN.ClipsDescendants = false
-PROHAXScreenGui.MAIN.BorderSizePixel = 0
-
-PROHAXScreenGui.topbar.Name = "topbar"
-PROHAXScreenGui.topbar.ZIndex = 1
-PROHAXScreenGui.topbar.Position = UDim2.new(0, 0, -0.0761670768, 0)
-PROHAXScreenGui.topbar.Size = UDim2.new(0, 573, 0, 31)
-PROHAXScreenGui.topbar.BackgroundColor3 = Color3.fromRGB(255,255,255)
-PROHAXScreenGui.topbar.BackgroundTransparency = 0
-PROHAXScreenGui.topbar.Visible = true
-PROHAXScreenGui.topbar.AnchorPoint = Vector2.new(0, 0)
-PROHAXScreenGui.topbar.ClipsDescendants = false
-PROHAXScreenGui.topbar.BorderSizePixel = 0
-
-PROHAXScreenGui.title.Name = "title"
-PROHAXScreenGui.title.ZIndex = 1
-PROHAXScreenGui.title.Position = UDim2.new(0.0383944139, 0, 0.0967741907, 0)
-PROHAXScreenGui.title.Size = UDim2.new(0, 151, 0, 25)
-PROHAXScreenGui.title.BackgroundColor3 = Color3.fromRGB(255,255,255)
-PROHAXScreenGui.title.BackgroundTransparency = 2
-PROHAXScreenGui.title.Text = "Secret Exploting panel"
-PROHAXScreenGui.title.TextScaled = true
-PROHAXScreenGui.title.TextSize = 14
-PROHAXScreenGui.title.Font = Enum.Font.Unknown
-PROHAXScreenGui.title.TextColor3 = Color3.fromRGB(0,0,0)
-PROHAXScreenGui.title.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-PROHAXScreenGui.title.TextStrokeTransparency = 1
-PROHAXScreenGui.title.TextWrapped = true
-PROHAXScreenGui.title.TextXAlignment = Enum.TextXAlignment.Center
-PROHAXScreenGui.title.TextYAlignment = Enum.TextYAlignment.Center
-PROHAXScreenGui.title.TextTransparency = 0
-PROHAXScreenGui.title.Visible = true
-PROHAXScreenGui.title.AnchorPoint = Vector2.new(0, 0)
-PROHAXScreenGui.title.ClipsDescendants = false
-
-PROHAXScreenGui.logo.Name = "logo"
-PROHAXScreenGui.logo.ZIndex = 1
-PROHAXScreenGui.logo.Position = UDim2.new(-0.012216405, 0, -0.0967741907, 0)
-PROHAXScreenGui.logo.Size = UDim2.new(0, 37, 0, 34)
-PROHAXScreenGui.logo.BackgroundColor3 = Color3.fromRGB(255,255,255)
-PROHAXScreenGui.logo.BackgroundTransparency = 1
-PROHAXScreenGui.logo.Image = "rbxassetid://76499234772636"
-PROHAXScreenGui.logo.ScaleType = Enum.ScaleType.Stretch
-PROHAXScreenGui.logo.ImageColor3 = Color3.fromRGB(255,255,255)
-PROHAXScreenGui.logo.ImageTransparency = 0
-PROHAXScreenGui.logo.Visible = true
-PROHAXScreenGui.logo.AnchorPoint = Vector2.new(0, 0)
-PROHAXScreenGui.logo.ClipsDescendants = false
-
-PROHAXScreenGui.TextBox.Name = "TextBox"
-PROHAXScreenGui.TextBox.ZIndex = 1
-PROHAXScreenGui.TextBox.Position = UDim2.new(0, 0, 0.0417690426, 0)
-PROHAXScreenGui.TextBox.Size = UDim2.new(0, 500, 0, 261)
-PROHAXScreenGui.TextBox.BackgroundColor3 = Color3.fromRGB(44,44,44)
-PROHAXScreenGui.TextBox.BackgroundTransparency = 0
-PROHAXScreenGui.TextBox.Text = "SON"
-PROHAXScreenGui.TextBox.TextScaled = false
-PROHAXScreenGui.TextBox.TextSize = 14
-PROHAXScreenGui.TextBox.Font = Enum.Font.Unknown
-PROHAXScreenGui.TextBox.TextColor3 = Color3.fromRGB(203,203,203)
-PROHAXScreenGui.TextBox.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-PROHAXScreenGui.TextBox.TextStrokeTransparency = 1
-PROHAXScreenGui.TextBox.TextWrapped = true
-PROHAXScreenGui.TextBox.TextXAlignment = Enum.TextXAlignment.Left
-PROHAXScreenGui.TextBox.TextYAlignment = Enum.TextYAlignment.Top
-PROHAXScreenGui.TextBox.TextTransparency = 0
-PROHAXScreenGui.TextBox.ClearTextOnFocus = true
-PROHAXScreenGui.TextBox.MultiLine = true
-PROHAXScreenGui.TextBox.Visible = true
-PROHAXScreenGui.TextBox.AnchorPoint = Vector2.new(0, 0)
-PROHAXScreenGui.TextBox.ClipsDescendants = false
-
-PROHAXScreenGui.Execute.Name = "Execute"
-PROHAXScreenGui.Execute.ZIndex = 1
-PROHAXScreenGui.Execute.Position = UDim2.new(0.012216405, 0, 0.742014766, 0)
-PROHAXScreenGui.Execute.Size = UDim2.new(0, 200, 0, 50)
-PROHAXScreenGui.Execute.BackgroundColor3 = Color3.fromRGB(85,255,0)
-PROHAXScreenGui.Execute.BackgroundTransparency = 0
-PROHAXScreenGui.Execute.Text = "Execute"
-PROHAXScreenGui.Execute.TextScaled = true
-PROHAXScreenGui.Execute.TextSize = 14
-PROHAXScreenGui.Execute.Font = Enum.Font.SourceSansBold
-PROHAXScreenGui.Execute.TextColor3 = Color3.fromRGB(0,0,0)
-PROHAXScreenGui.Execute.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-PROHAXScreenGui.Execute.TextStrokeTransparency = 1
-PROHAXScreenGui.Execute.TextWrapped = true
-PROHAXScreenGui.Execute.TextXAlignment = Enum.TextXAlignment.Center
-PROHAXScreenGui.Execute.TextYAlignment = Enum.TextYAlignment.Center
-PROHAXScreenGui.Execute.TextTransparency = 0
-PROHAXScreenGui.Execute.Visible = true
-PROHAXScreenGui.Execute.AnchorPoint = Vector2.new(0, 0)
-PROHAXScreenGui.Execute.ClipsDescendants = false
-
-PROHAXScreenGui.ClearTextboxt.Name = "ClearTextboxt"
-PROHAXScreenGui.ClearTextboxt.ZIndex = 1
-PROHAXScreenGui.ClearTextboxt.Position = UDim2.new(0.41186735, 0, 0.742014766, 0)
-PROHAXScreenGui.ClearTextboxt.Size = UDim2.new(0, 200, 0, 50)
-PROHAXScreenGui.ClearTextboxt.BackgroundColor3 = Color3.fromRGB(85,255,0)
-PROHAXScreenGui.ClearTextboxt.BackgroundTransparency = 0
-PROHAXScreenGui.ClearTextboxt.Text = "Clear"
-PROHAXScreenGui.ClearTextboxt.TextScaled = true
-PROHAXScreenGui.ClearTextboxt.TextSize = 14
-PROHAXScreenGui.ClearTextboxt.Font = Enum.Font.SourceSansBold
-PROHAXScreenGui.ClearTextboxt.TextColor3 = Color3.fromRGB(0,0,0)
-PROHAXScreenGui.ClearTextboxt.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-PROHAXScreenGui.ClearTextboxt.TextStrokeTransparency = 1
-PROHAXScreenGui.ClearTextboxt.TextWrapped = true
-PROHAXScreenGui.ClearTextboxt.TextXAlignment = Enum.TextXAlignment.Center
-PROHAXScreenGui.ClearTextboxt.TextYAlignment = Enum.TextYAlignment.Center
-PROHAXScreenGui.ClearTextboxt.TextTransparency = 0
-PROHAXScreenGui.ClearTextboxt.Visible = true
-PROHAXScreenGui.ClearTextboxt.AnchorPoint = Vector2.new(0, 0)
-PROHAXScreenGui.ClearTextboxt.ClipsDescendants = false
-
-PROHAXScreenGui.injectaka_scan_all_the_game.Name = "injectaka scan all the game"
-PROHAXScreenGui.injectaka_scan_all_the_game.ZIndex = 1
-PROHAXScreenGui.injectaka_scan_all_the_game.Position = UDim2.new(0.797556698, 0, 0.712530732, 0)
-PROHAXScreenGui.injectaka_scan_all_the_game.Size = UDim2.new(0, 109, 0, 105)
-PROHAXScreenGui.injectaka_scan_all_the_game.BackgroundColor3 = Color3.fromRGB(255,255,255)
-PROHAXScreenGui.injectaka_scan_all_the_game.BackgroundTransparency = 1
-PROHAXScreenGui.injectaka_scan_all_the_game.Image = "rbxassetid://122388354733007"
-PROHAXScreenGui.injectaka_scan_all_the_game.ScaleType = Enum.ScaleType.Stretch
-PROHAXScreenGui.injectaka_scan_all_the_game.ImageColor3 = Color3.fromRGB(255,255,255)
-PROHAXScreenGui.injectaka_scan_all_the_game.ImageTransparency = 0
-PROHAXScreenGui.injectaka_scan_all_the_game.Visible = true
-PROHAXScreenGui.injectaka_scan_all_the_game.AnchorPoint = Vector2.new(0, 0)
-PROHAXScreenGui.injectaka_scan_all_the_game.ClipsDescendants = false
-
--- Close button (top right of topbar)
-PROHAXScreenGui.Close.Name = "Close"
-PROHAXScreenGui.Close.ZIndex = 2
-PROHAXScreenGui.Close.Position = UDim2.new(1, -32, 0, 0)
-PROHAXScreenGui.Close.Size = UDim2.new(0, 32, 0, 31)
-PROHAXScreenGui.Close.BackgroundColor3 = Color3.fromRGB(220, 50, 50)
-PROHAXScreenGui.Close.BackgroundTransparency = 0
-PROHAXScreenGui.Close.Text = "X"
-PROHAXScreenGui.Close.TextScaled = true
-PROHAXScreenGui.Close.TextSize = 18
-PROHAXScreenGui.Close.Font = Enum.Font.SourceSansBold
-PROHAXScreenGui.Close.TextColor3 = Color3.fromRGB(255,255,255)
-PROHAXScreenGui.Close.TextStrokeTransparency = 1
-PROHAXScreenGui.Close.TextWrapped = true
-PROHAXScreenGui.Close.TextXAlignment = Enum.TextXAlignment.Center
-PROHAXScreenGui.Close.TextYAlignment = Enum.TextYAlignment.Center
-PROHAXScreenGui.Close.BorderSizePixel = 0
-PROHAXScreenGui.Close.Visible = true
-PROHAXScreenGui.Close.AnchorPoint = Vector2.new(0, 0)
-
--- ═══════════════════════════════════════════════════════════════
--- FUNCTIONALITY
--- ═══════════════════════════════════════════════════════════════
-
-local Players = game:GetService("Players")
-local StarterGui = game:GetService("StarterGui")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local LP = Players.LocalPlayer
+API.Init(Scanner, Functions)
 
 local foundVulns = {}
-local lastScanHits = 0
 
 local function notify(title, text, duration)
-	duration = duration or 5
-	pcall(function()
-		StarterGui:SetCore("SendNotification", {
-			Title = title,
-			Text = text,
-			Duration = duration,
-			Button1 = "OK"
-		})
-	end)
+    pcall(function()
+        StarterGui:SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Duration = duration or 5,
+            Button1 = "OK"
+        })
+    end)
 end
 
-local function bruteScan()
-	foundVulns = {}
-	local hits = 0
+-- ═══════════════════════════════════════
+-- GUI (exact same look + extra buttons)
+-- ═══════════════════════════════════════
+local gui = {
+    ScreenGui = Instance.new("ScreenGui"),
+    MAIN      = Instance.new("Frame"),
+    topbar    = Instance.new("Frame"),
+    title     = Instance.new("TextLabel"),
+    logo      = Instance.new("ImageLabel"),
+    TextBox   = Instance.new("TextBox"),
+    Execute   = Instance.new("TextButton"),
+    Clear     = Instance.new("TextButton"),
+    Scan      = Instance.new("ImageButton"),
+    Close     = Instance.new("TextButton"),
+    DexBtn    = Instance.new("TextButton"),
+    MenuBtn   = Instance.new("TextButton"),
+}
 
-	local keywords = {
-		"admin","ban","kick","kill","give","cash","money","coins","weapon","gun",
-		"tool","exploit","backdoor","ss","server","execute","loadstring","require",
-		"script","cmd","command","mod","owner","dev","hack","inject","run","code",
-		"lua","fire","invoke","remote","event","func","handler","load","string"
-	}
+gui.ScreenGui.Parent = LP:WaitForChild("PlayerGui")
+gui.MAIN.Parent      = gui.ScreenGui
+gui.topbar.Parent    = gui.MAIN
+gui.title.Parent     = gui.topbar
+gui.logo.Parent      = gui.topbar
+gui.TextBox.Parent   = gui.MAIN
+gui.Execute.Parent   = gui.MAIN
+gui.Clear.Parent     = gui.MAIN
+gui.Scan.Parent      = gui.MAIN
+gui.Close.Parent     = gui.topbar
+gui.DexBtn.Parent    = gui.MAIN
+gui.MenuBtn.Parent   = gui.MAIN
 
-	local function isSuspicious(name)
-		name = string.lower(name or "")
-		for _, kw in ipairs(keywords) do
-			if string.find(name, kw) then return true end
-		end
-		return false
-	end
+gui.ScreenGui.Name = "PROHAXScreenGui"
+gui.ScreenGui.ResetOnSpawn = true
 
-	local function scanInstance(obj)
-		if not obj then return end
-		local class = obj.ClassName
-		local name = obj.Name
-		local path = obj:GetFullName()
+gui.MAIN.Name = "MAIN"
+gui.MAIN.Position = UDim2.new(0.370499432, 0, 0.377276659, 0)
+gui.MAIN.Size = UDim2.new(0, 573, 0, 407)
+gui.MAIN.BackgroundColor3 = Color3.fromRGB(48,48,48)
+gui.MAIN.BorderSizePixel = 0
 
-		if class == "RemoteEvent" or class == "RemoteFunction" then
-			local score = isSuspicious(name) and 95 or 55
-			table.insert(foundVulns, {
-				type = class,
-				name = name,
-				path = path,
-				obj = obj,
-				score = score
-			})
-			hits = hits + 1
-		elseif class == "ModuleScript" and isSuspicious(name) then
-			table.insert(foundVulns, {
-				type = "ModuleScript",
-				name = name,
-				path = path,
-				obj = obj,
-				score = 80
-			})
-			hits = hits + 1
-		elseif (class == "BindableEvent" or class == "BindableFunction") and isSuspicious(name) then
-			table.insert(foundVulns, {
-				type = class,
-				name = name,
-				path = path,
-				obj = obj,
-				score = 70
-			})
-			hits = hits + 1
-		end
-	end
+gui.topbar.Name = "topbar"
+gui.topbar.Position = UDim2.new(0, 0, -0.0761670768, 0)
+gui.topbar.Size = UDim2.new(0, 573, 0, 31)
+gui.topbar.BackgroundColor3 = Color3.fromRGB(255,255,255)
+gui.topbar.BorderSizePixel = 0
 
-	local function deep(obj)
-		scanInstance(obj)
-		for _, child in ipairs(obj:GetChildren()) do
-			pcall(deep, child)
-		end
-	end
+gui.title.Name = "title"
+gui.title.Position = UDim2.new(0.0383944139, 0, 0.0967741907, 0)
+gui.title.Size = UDim2.new(0, 151, 0, 25)
+gui.title.BackgroundTransparency = 1
+gui.title.Text = "Secret Exploting panel"
+gui.title.TextScaled = true
+gui.title.TextColor3 = Color3.fromRGB(0,0,0)
 
-	local roots = {
-		ReplicatedStorage,
-		game:GetService("Workspace"),
-		game:GetService("Lighting"),
-		game:GetService("Players"),
-		game:GetService("StarterGui"),
-		game:GetService("StarterPack"),
-		game:GetService("StarterPlayer"),
-		game:GetService("SoundService"),
-		game:GetService("Chat"),
-		game:GetService("Teams"),
-		game:GetService("TestService"),
-	}
+gui.logo.Name = "logo"
+gui.logo.Position = UDim2.new(-0.012216405, 0, -0.0967741907, 0)
+gui.logo.Size = UDim2.new(0, 37, 0, 34)
+gui.logo.BackgroundTransparency = 1
+gui.logo.Image = "rbxassetid://76499234772636"
 
-	for _, root in ipairs(roots) do
-		pcall(deep, root)
-	end
+gui.TextBox.Name = "TextBox"
+gui.TextBox.Position = UDim2.new(0, 0, 0.0417690426, 0)
+gui.TextBox.Size = UDim2.new(0, 500, 0, 261)
+gui.TextBox.BackgroundColor3 = Color3.fromRGB(44,44,44)
+gui.TextBox.Text = "SON"
+gui.TextBox.TextColor3 = Color3.fromRGB(203,203,203)
+gui.TextBox.TextSize = 14
+gui.TextBox.TextXAlignment = Enum.TextXAlignment.Left
+gui.TextBox.TextYAlignment = Enum.TextYAlignment.Top
+gui.TextBox.ClearTextOnFocus = true
+gui.TextBox.MultiLine = true
+gui.TextBox.TextWrapped = true
 
-	for _, plr in ipairs(Players:GetPlayers()) do
-		pcall(function()
-			if plr.Character then deep(plr.Character) end
-			if plr:FindFirstChild("Backpack") then deep(plr.Backpack) end
-			if plr:FindFirstChild("PlayerGui") then deep(plr.PlayerGui) end
-		end)
-	end
+gui.Execute.Name = "Execute"
+gui.Execute.Position = UDim2.new(0.012216405, 0, 0.742014766, 0)
+gui.Execute.Size = UDim2.new(0, 200, 0, 50)
+gui.Execute.BackgroundColor3 = Color3.fromRGB(85,255,0)
+gui.Execute.Text = "Execute"
+gui.Execute.TextScaled = true
+gui.Execute.Font = Enum.Font.SourceSansBold
+gui.Execute.TextColor3 = Color3.fromRGB(0,0,0)
 
-	table.sort(foundVulns, function(a, b) return a.score > b.score end)
-	return hits
-end
+gui.Clear.Name = "ClearTextboxt"
+gui.Clear.Position = UDim2.new(0.41186735, 0, 0.742014766, 0)
+gui.Clear.Size = UDim2.new(0, 200, 0, 50)
+gui.Clear.BackgroundColor3 = Color3.fromRGB(85,255,0)
+gui.Clear.Text = "Clear"
+gui.Clear.TextScaled = true
+gui.Clear.Font = Enum.Font.SourceSansBold
+gui.Clear.TextColor3 = Color3.fromRGB(0,0,0)
 
-local function trySSExecute(payload)
-	if not payload or payload == "" or payload == "SON" then
-		notify("SS Execute", "TextBox empty – put payload first", 4)
-		return
-	end
+gui.Scan.Name = "injectaka scan all the game"
+gui.Scan.Position = UDim2.new(0.797556698, 0, 0.712530732, 0)
+gui.Scan.Size = UDim2.new(0, 109, 0, 105)
+gui.Scan.BackgroundTransparency = 1
+gui.Scan.Image = "rbxassetid://122388354733007"
 
-	if #foundVulns == 0 then
-		notify("SS Execute", "No vulns found – scan first", 4)
-		return
-	end
+gui.Close.Name = "Close"
+gui.Close.Position = UDim2.new(1, -32, 0, 0)
+gui.Close.Size = UDim2.new(0, 32, 0, 31)
+gui.Close.BackgroundColor3 = Color3.fromRGB(220,50,50)
+gui.Close.Text = "X"
+gui.Close.TextScaled = true
+gui.Close.Font = Enum.Font.SourceSansBold
+gui.Close.TextColor3 = Color3.fromRGB(255,255,255)
+gui.Close.BorderSizePixel = 0
 
-	notify("Executing...", "Pushing payload through found remotes", 3)
+-- extra buttons
+gui.DexBtn.Name = "DexBtn"
+gui.DexBtn.Position = UDim2.new(0.012, 0, 0.88, 0)
+gui.DexBtn.Size = UDim2.new(0, 120, 0, 28)
+gui.DexBtn.BackgroundColor3 = Color3.fromRGB(60,60,180)
+gui.DexBtn.Text = "Open Dex"
+gui.DexBtn.TextColor3 = Color3.new(1,1,1)
+gui.DexBtn.Font = Enum.Font.SourceSansBold
 
-	local successCount = 0
-	local tried = 0
+gui.MenuBtn.Name = "MenuBtn"
+gui.MenuBtn.Position = UDim2.new(0.25, 0, 0.88, 0)
+gui.MenuBtn.Size = UDim2.new(0, 140, 0, 28)
+gui.MenuBtn.BackgroundColor3 = Color3.fromRGB(60,120,60)
+gui.MenuBtn.Text = "Functions Menu"
+gui.MenuBtn.TextColor3 = Color3.new(1,1,1)
+gui.MenuBtn.Font = Enum.Font.SourceSansBold
 
-	for _, v in ipairs(foundVulns) do
-		if v.type == "RemoteEvent" and v.obj then
-			tried = tried + 1
-			local ok = pcall(function()
-				v.obj:FireServer(payload)
-				v.obj:FireServer(payload, LP)
-				v.obj:FireServer({code = payload})
-				v.obj:FireServer("execute", payload)
-				v.obj:FireServer("run", payload)
-				v.obj:FireServer("loadstring", payload)
-			end)
-			if ok then successCount = successCount + 1 end
-		elseif v.type == "RemoteFunction" and v.obj then
-			tried = tried + 1
-			local ok = pcall(function()
-				v.obj:InvokeServer(payload)
-				v.obj:InvokeServer(payload, LP)
-				v.obj:InvokeServer({code = payload})
-				v.obj:InvokeServer("execute", payload)
-			end)
-			if ok then successCount = successCount + 1 end
-		end
-	end
-
-	task.wait(0.4)
-
-	if successCount > 0 then
-		notify("Worked", "Tried " .. tried .. " • " .. successCount .. " accepted", 5)
-	else
-		notify("Failed", "Tried " .. tried .. " remotes – none accepted", 5)
-	end
-end
-
--- Scan button (NO textbox dump)
-PROHAXScreenGui.injectaka_scan_all_the_game.MouseButton1Click:Connect(function()
-	notify("Scanning", "Brute-force SS vuln scan running…", 3)
-
-	task.spawn(function()
-		local hits = bruteScan()
-		lastScanHits = hits
-
-		if hits > 0 then
-			notify("Vuln Founded", hits .. " possible SS vector(s) ready", 6)
-		else
-			notify("Vuln Not Founded", "No clear SS vulnerabilities", 5)
-		end
-	end)
+-- ═══════════════════════════════════════
+-- EVENTS
+-- ═══════════════════════════════════════
+gui.Scan.MouseButton1Click:Connect(function()
+    notify("Scanning", "Ultimate long scan running…", 4)
+    task.spawn(function()
+        local results = API.Scan({liveTest = true, maxTests = 50})
+        foundVulns = results
+        if #results > 0 then
+            notify("Vuln Founded", #results .. " possible SS vector(s)", 6)
+        else
+            notify("Vuln Not Founded", "No clear SS vulnerabilities", 5)
+        end
+    end)
 end)
 
--- Execute
-PROHAXScreenGui.Execute.MouseButton1Click:Connect(function()
-	local payload = PROHAXScreenGui.TextBox.Text
-	trySSExecute(payload)
+gui.Execute.MouseButton1Click:Connect(function()
+    local payload = gui.TextBox.Text
+    notify("Executing...", "Pushing payload…", 3)
+    local ok, success, tried = API.ExecuteSS(payload)
+    task.wait(0.3)
+    if ok then
+        notify("Worked", "Tried " .. tostring(tried) .. " • " .. tostring(success) .. " accepted", 5)
+    else
+        notify("Failed", "Tried " .. tostring(tried) .. " remotes – none accepted", 5)
+    end
 end)
 
--- Clear
-PROHAXScreenGui.ClearTextboxt.MouseButton1Click:Connect(function()
-	PROHAXScreenGui.TextBox.Text = ""
-	notify("Cleared", "TextBox wiped", 2)
+gui.Clear.MouseButton1Click:Connect(function()
+    gui.TextBox.Text = ""
+    notify("Cleared", "TextBox wiped", 2)
 end)
 
--- Close
-PROHAXScreenGui.Close.MouseButton1Click:Connect(function()
-	PROHAXScreenGui.PROHAXScreenGui:Destroy()
+gui.Close.MouseButton1Click:Connect(function()
+    gui.ScreenGui:Destroy()
+end)
+
+gui.DexBtn.MouseButton1Click:Connect(function()
+    Dex.Open()
+end)
+
+gui.MenuBtn.MouseButton1Click:Connect(function()
+    local list = API.ListFunctions()
+    Menu.Open(list, function(name)
+        notify("Selected", name, 3)
+        API.CallFunction(name)
+    end)
 end)
 
 -- drag
 local dragging, dragInput, dragStart, startPos
 local function update(input)
-	local delta = input.Position - dragStart
-	PROHAXScreenGui.MAIN.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    local delta = input.Position - dragStart
+    gui.MAIN.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 end
 
-PROHAXScreenGui.topbar.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = true
-		dragStart = input.Position
-		startPos = PROHAXScreenGui.MAIN.Position
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
-			end
-		end)
-	end
+gui.topbar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = gui.MAIN.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then dragging = false end
+        end)
+    end
 end)
 
-PROHAXScreenGui.topbar.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-		dragInput = input
-	end
+gui.topbar.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
 end)
 
-game:GetService("UserInputService").InputChanged:Connect(function(input)
-	if input == dragInput and dragging then
-		update(input)
-	end
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then update(input) end
 end)
